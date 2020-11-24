@@ -30,6 +30,8 @@ Chaque trampoline, saute dans `idt_common` qui appelle le gestionnaire d'interru
 ### Question 2
 
 **Activez les interruptions dans une boucle infinie. Que constatez-vous ?**
+> il semblerait que j'e n'aie plus la main pour rien faire
+> on dirait même que ça a fait cracher qemu (c'est possiblement pas lié)
 
 ---
 
@@ -42,6 +44,9 @@ Chaque trampoline, saute dans `idt_common` qui appelle le gestionnaire d'interru
 ### Question 3.1
 
 **Localisez l'IDT et affichez son adresse de chargement.**
+> base = 0x304da0
+> limite : 2047
+> on a bien une idt de 2KB donc on est bien dans les bonnes valeurs pour un système 32bits
 
 ---
 

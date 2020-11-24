@@ -4,22 +4,22 @@
 #include <info.h>
 
 extern info_t *info;
-extern void idt_trampoline();
-static int_desc_t IDT[IDT_NR_DESC];
+extern void idt_trampoline();       // se réfère aux tramplines de idt.s
+static int_desc_t IDT[IDT_NR_DESC]; // le tableau qui contiendra tous nos isr ?
 
 void intr_init()
 {
    idt_reg_t idtr;
-   offset_t  isr;
-   size_t    i;
+   offset_t isr;
+   size_t i;
 
    isr = (offset_t)idt_trampoline;
 
    /* re-use default grub GDT code descriptor */
-   for(i=0 ; i<IDT_NR_DESC ; i++, isr += IDT_ISR_ALGN)
+   for (i = 0; i < IDT_NR_DESC; i++, isr += IDT_ISR_ALGN)
       int_desc(&IDT[i], gdt_krn_seg_sel(1), isr);
 
-   idtr.desc  = IDT;
+   idtr.desc = IDT;
    idtr.limit = sizeof(IDT) - 1;
    set_idtr(idtr);
 }
@@ -40,23 +40,12 @@ void __regparm__(1) intr_hdlr(int_ctx_t *ctx)
          "esp     : 0x%x\n"
          "ebp     : 0x%x\n"
          "esi     : 0x%x\n"
-         "edi     : 0x%x\n"
-         ,ctx->nr.raw, ctx->err.raw
-         ,ctx->cs.raw, ctx->eip.raw
-         ,ctx->ss.raw, ctx->esp.raw
-         ,ctx->eflags.raw
-         ,ctx->gpr.eax.raw
-         ,ctx->gpr.ecx.raw
-         ,ctx->gpr.edx.raw
-         ,ctx->gpr.ebx.raw
-         ,ctx->gpr.esp.raw
-         ,ctx->gpr.ebp.raw
-         ,ctx->gpr.esi.raw
-         ,ctx->gpr.edi.raw);
+         "edi     : 0x%x\n",
+         ctx->nr.raw, ctx->err.raw, ctx->cs.raw, ctx->eip.raw, ctx->ss.raw, ctx->esp.raw, ctx->eflags.raw, ctx->gpr.eax.raw, ctx->gpr.ecx.raw, ctx->gpr.edx.raw, ctx->gpr.ebx.raw, ctx->gpr.esp.raw, ctx->gpr.ebp.raw, ctx->gpr.esi.raw, ctx->gpr.edi.raw);
 
    uint8_t vector = ctx->nr.blow;
 
-   if(vector < NR_EXCP)
+   if (vector < NR_EXCP)
       excp_hdlr(ctx);
    else
       debug("ignore IRQ %d\n", vector);
