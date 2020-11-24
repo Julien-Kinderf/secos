@@ -5,6 +5,11 @@
 extern info_t *info;
 extern int_desc_t IDT[IDT_NR_DESC];
 
+bp_handler()
+{
+    debug("Je suis un message de debug de la fonction bp_handler ! On duty !\n");
+}
+
 void tp()
 {
     intr_init();
