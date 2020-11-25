@@ -24,6 +24,7 @@ void bp_trigger()
 {
     // déclenche un breakpoint grâce à l'instruction int3
     asm("int3");
+    debug("I just triggered the interrupt, yay! \n");
 }
 
 void tp()
