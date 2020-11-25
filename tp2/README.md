@@ -65,6 +65,8 @@ Chaque trampoline, saute dans `idt_common` qui appelle le gestionnaire d'interru
 ### Question 3.4
 
 **Modifiez le descripteur d'interruption `(int_desc_t)` de #BP afin d'appeler `bp_handler()` la place du trampoline déjà installé. Faites un appel explicite à `bp_trigger()` dans `tp()`. Que constatez-vous ?**
+> Première chose : il semble que bp_handler se lance correctement
+> Seconde chose : il semble qu'après que bp_handler aie fini, tout crashe : on a une fatal exception : divide by zero (est ce que c'est cr4 qui vaut zéro ?)
 
 ---
 
