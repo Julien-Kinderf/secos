@@ -76,6 +76,7 @@ Chaque trampoline, saute dans `idt_common` qui appelle le gestionnaire d'interru
  - **Pensez à la pile au moment de l'arrivée de l'interruption**
  - **Que doit faire exactement la fonction `bp_handler()` lorsqu'elle se termine ?**
  - **N'oubliez pas qu'elle n'est pas une simple fonction mais un gestionnaire d'interruption.**
+ > intéressant : il fallait mettre un leave dans le handler, ça serait intéressant de comprendre pourquoi.
 
 ---
 
