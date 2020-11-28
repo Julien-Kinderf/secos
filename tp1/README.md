@@ -28,7 +28,7 @@ par
 **Grub a démarré notre noyau en mode protégé. Il a donc configuré une GDT avant d'exécuter notre point d'entrée. Affichez le contenu de cette GDT. Que constatez-vous ?**
 
 **Servez-vous des outils présents dans notre OS (`get_gdtr(), seg_desc_t et gdt_reg_t`)**
-
+> On constate qu'il y a déjà 5 segments de définis, qui commencent tous à 0, ont tous une limite de 65520 et un type de 0.
 ---
 
 ### Question 2
